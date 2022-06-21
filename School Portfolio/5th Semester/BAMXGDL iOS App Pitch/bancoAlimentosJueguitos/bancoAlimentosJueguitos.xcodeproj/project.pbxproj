@@ -1,0 +1,712 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5A2DF77426E7EA0400228E88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DF77326E7EA0400228E88 /* AppDelegate.swift */; };
+		5A2DF77626E7EA0400228E88 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5A2DF77526E7EA0400228E88 /* GameScene.sks */; };
+		5A2DF77826E7EA0400228E88 /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5A2DF77726E7EA0400228E88 /* Actions.sks */; };
+		5A2DF77A26E7EA0400228E88 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DF77926E7EA0400228E88 /* GameScene.swift */; };
+		5A2DF77C26E7EA0400228E88 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A2DF77B26E7EA0400228E88 /* GameViewController.swift */; };
+		5A2DF77F26E7EA0400228E88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A2DF77D26E7EA0400228E88 /* Main.storyboard */; };
+		5A2DF78126E7EA0500228E88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A2DF78026E7EA0500228E88 /* Assets.xcassets */; };
+		5A6DC55A2718CD0600E72DE6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A6DC5592718CD0600E72DE6 /* GoogleService-Info.plist */; };
+		5A9E003D271E120D0020640F /* ProfileScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A9E003C271E120D0020640F /* ProfileScene.swift */; };
+		7486CBB12720D18400493ACD /* BAMXAppIcon180.png in Resources */ = {isa = PBXBuildFile; fileRef = 7486CBAF2720D18300493ACD /* BAMXAppIcon180.png */; };
+		7486CBB22720D18400493ACD /* BAMXAppIcon120.png in Resources */ = {isa = PBXBuildFile; fileRef = 7486CBB02720D18400493ACD /* BAMXAppIcon120.png */; };
+		9879E0EE270B2F2A000576F8 /* MenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9879E0ED270B2F2A000576F8 /* MenuScene.sks */; };
+		9879E0FF270B30CC000576F8 /* MenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9879E0FE270B30CC000576F8 /* MenuScene.swift */; };
+		9879E107270B35DC000576F8 /* LeaderboardScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 9879E106270B35DC000576F8 /* LeaderboardScene.sks */; };
+		9879E10C270B35FD000576F8 /* LeaderboardScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9879E10B270B35FD000576F8 /* LeaderboardScene.swift */; };
+		9887602C2720C307005155F5 /* saved.json in Resources */ = {isa = PBXBuildFile; fileRef = 9887602B2720C307005155F5 /* saved.json */; };
+		988760312720C310005155F5 /* situations.json in Resources */ = {isa = PBXBuildFile; fileRef = 988760302720C310005155F5 /* situations.json */; };
+		98AA29BD271F96C90014285B /* GameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98AA29BC271F96C90014285B /* GameOver.swift */; };
+		98AA29C2271F96F80014285B /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 98AA29C1271F96F80014285B /* GameOver.sks */; };
+		E237AA22B37DF063EA662DF6 /* Pods_bancoAlimentosJueguitos.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C35ED0B2636EAE820A5536CA /* Pods_bancoAlimentosJueguitos.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5A2DF78826E7EA0500228E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A2DF76826E7EA0400228E88 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A2DF76F26E7EA0400228E88;
+			remoteInfo = bancoAlimentosJueguitos;
+		};
+		5A2DF79326E7EA0500228E88 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5A2DF76826E7EA0400228E88 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5A2DF76F26E7EA0400228E88;
+			remoteInfo = bancoAlimentosJueguitos;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3ED1D7719D5451E090DF3096 /* Pods-bancoAlimentosJueguitos.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bancoAlimentosJueguitos.release.xcconfig"; path = "Target Support Files/Pods-bancoAlimentosJueguitos/Pods-bancoAlimentosJueguitos.release.xcconfig"; sourceTree = "<group>"; };
+		5A2DF77026E7EA0400228E88 /* bancoAlimentosJueguitos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bancoAlimentosJueguitos.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A2DF77326E7EA0400228E88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5A2DF77526E7EA0400228E88 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
+		5A2DF77726E7EA0400228E88 /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		5A2DF77926E7EA0400228E88 /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
+		5A2DF77B26E7EA0400228E88 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		5A2DF77E26E7EA0400228E88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		5A2DF78026E7EA0500228E88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5A2DF78226E7EA0500228E88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5A2DF78726E7EA0500228E88 /* bancoAlimentosJueguitosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bancoAlimentosJueguitosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A2DF79226E7EA0500228E88 /* bancoAlimentosJueguitosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = bancoAlimentosJueguitosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5A6DC5592718CD0600E72DE6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5A9E003C271E120D0020640F /* ProfileScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScene.swift; sourceTree = "<group>"; };
+		7309D76168AFC46AE4C20421 /* Pods-bancoAlimentosJueguitos.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-bancoAlimentosJueguitos.debug.xcconfig"; path = "Target Support Files/Pods-bancoAlimentosJueguitos/Pods-bancoAlimentosJueguitos.debug.xcconfig"; sourceTree = "<group>"; };
+		7486CBAF2720D18300493ACD /* BAMXAppIcon180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BAMXAppIcon180.png; sourceTree = "<group>"; };
+		7486CBB02720D18400493ACD /* BAMXAppIcon120.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BAMXAppIcon120.png; sourceTree = "<group>"; };
+		9879E0ED270B2F2A000576F8 /* MenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MenuScene.sks; sourceTree = "<group>"; };
+		9879E0FE270B30CC000576F8 /* MenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuScene.swift; sourceTree = "<group>"; };
+		9879E106270B35DC000576F8 /* LeaderboardScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = LeaderboardScene.sks; sourceTree = "<group>"; };
+		9879E10B270B35FD000576F8 /* LeaderboardScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardScene.swift; sourceTree = "<group>"; };
+		9887602B2720C307005155F5 /* saved.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = saved.json; sourceTree = "<group>"; };
+		988760302720C310005155F5 /* situations.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = situations.json; sourceTree = "<group>"; };
+		98AA29BC271F96C90014285B /* GameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOver.swift; sourceTree = "<group>"; };
+		98AA29C1271F96F80014285B /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
+		C35ED0B2636EAE820A5536CA /* Pods_bancoAlimentosJueguitos.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_bancoAlimentosJueguitos.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5A2DF76D26E7EA0400228E88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E237AA22B37DF063EA662DF6 /* Pods_bancoAlimentosJueguitos.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF78426E7EA0500228E88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF78F26E7EA0500228E88 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A8A95D6A19DEB50D9DF9A2E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7309D76168AFC46AE4C20421 /* Pods-bancoAlimentosJueguitos.debug.xcconfig */,
+				3ED1D7719D5451E090DF3096 /* Pods-bancoAlimentosJueguitos.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5A2DF76726E7EA0400228E88 = {
+			isa = PBXGroup;
+			children = (
+				5A2DF77226E7EA0400228E88 /* bancoAlimentosJueguitos */,
+				5A2DF77126E7EA0400228E88 /* Products */,
+				A46A64F2DCE22C1877E0A887 /* Frameworks */,
+				3A8A95D6A19DEB50D9DF9A2E /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		5A2DF77126E7EA0400228E88 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5A2DF77026E7EA0400228E88 /* bancoAlimentosJueguitos.app */,
+				5A2DF78726E7EA0500228E88 /* bancoAlimentosJueguitosTests.xctest */,
+				5A2DF79226E7EA0500228E88 /* bancoAlimentosJueguitosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5A2DF77226E7EA0400228E88 /* bancoAlimentosJueguitos */ = {
+			isa = PBXGroup;
+			children = (
+				5A2DF77326E7EA0400228E88 /* AppDelegate.swift */,
+				5A2DF77726E7EA0400228E88 /* Actions.sks */,
+				5A2DF77B26E7EA0400228E88 /* GameViewController.swift */,
+				5A2DF77D26E7EA0400228E88 /* Main.storyboard */,
+				5A2DF78026E7EA0500228E88 /* Assets.xcassets */,
+				7486CBB02720D18400493ACD /* BAMXAppIcon120.png */,
+				7486CBAF2720D18300493ACD /* BAMXAppIcon180.png */,
+				5A2DF78226E7EA0500228E88 /* Info.plist */,
+				9879E0ED270B2F2A000576F8 /* MenuScene.sks */,
+				5A6DC5592718CD0600E72DE6 /* GoogleService-Info.plist */,
+				9879E0FE270B30CC000576F8 /* MenuScene.swift */,
+				9887602B2720C307005155F5 /* saved.json */,
+				988760302720C310005155F5 /* situations.json */,
+				9879E0F7270B303A000576F8 /* Main Game */,
+				9879E110270B36B3000576F8 /* Leaderboard */,
+				5A9E003B271E11A90020640F /* Profile */,
+				98AA29C7271F97470014285B /* GameOver */,
+			);
+			path = bancoAlimentosJueguitos;
+			sourceTree = "<group>";
+		};
+		5A9E003B271E11A90020640F /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5A9E003C271E120D0020640F /* ProfileScene.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		9879E0F7270B303A000576F8 /* Main Game */ = {
+			isa = PBXGroup;
+			children = (
+				5A2DF77526E7EA0400228E88 /* GameScene.sks */,
+				5A2DF77926E7EA0400228E88 /* GameScene.swift */,
+			);
+			path = "Main Game";
+			sourceTree = "<group>";
+		};
+		9879E110270B36B3000576F8 /* Leaderboard */ = {
+			isa = PBXGroup;
+			children = (
+				9879E106270B35DC000576F8 /* LeaderboardScene.sks */,
+				9879E10B270B35FD000576F8 /* LeaderboardScene.swift */,
+			);
+			path = Leaderboard;
+			sourceTree = "<group>";
+		};
+		98AA29C7271F97470014285B /* GameOver */ = {
+			isa = PBXGroup;
+			children = (
+				98AA29BC271F96C90014285B /* GameOver.swift */,
+				98AA29C1271F96F80014285B /* GameOver.sks */,
+			);
+			path = GameOver;
+			sourceTree = "<group>";
+		};
+		A46A64F2DCE22C1877E0A887 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C35ED0B2636EAE820A5536CA /* Pods_bancoAlimentosJueguitos.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5A2DF76F26E7EA0400228E88 /* bancoAlimentosJueguitos */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A2DF79B26E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitos" */;
+			buildPhases = (
+				20DDBBE20F024F1EB9E930BA /* [CP] Check Pods Manifest.lock */,
+				5A2DF76C26E7EA0400228E88 /* Sources */,
+				5A2DF76D26E7EA0400228E88 /* Frameworks */,
+				5A2DF76E26E7EA0400228E88 /* Resources */,
+				D9B023B1C4D41D24042FB875 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = bancoAlimentosJueguitos;
+			productName = bancoAlimentosJueguitos;
+			productReference = 5A2DF77026E7EA0400228E88 /* bancoAlimentosJueguitos.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5A2DF78626E7EA0500228E88 /* bancoAlimentosJueguitosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A2DF79E26E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitosTests" */;
+			buildPhases = (
+				5A2DF78326E7EA0500228E88 /* Sources */,
+				5A2DF78426E7EA0500228E88 /* Frameworks */,
+				5A2DF78526E7EA0500228E88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A2DF78926E7EA0500228E88 /* PBXTargetDependency */,
+			);
+			name = bancoAlimentosJueguitosTests;
+			productName = bancoAlimentosJueguitosTests;
+			productReference = 5A2DF78726E7EA0500228E88 /* bancoAlimentosJueguitosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5A2DF79126E7EA0500228E88 /* bancoAlimentosJueguitosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5A2DF7A126E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitosUITests" */;
+			buildPhases = (
+				5A2DF78E26E7EA0500228E88 /* Sources */,
+				5A2DF78F26E7EA0500228E88 /* Frameworks */,
+				5A2DF79026E7EA0500228E88 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A2DF79426E7EA0500228E88 /* PBXTargetDependency */,
+			);
+			name = bancoAlimentosJueguitosUITests;
+			productName = bancoAlimentosJueguitosUITests;
+			productReference = 5A2DF79226E7EA0500228E88 /* bancoAlimentosJueguitosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5A2DF76826E7EA0400228E88 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1250;
+				LastUpgradeCheck = 1250;
+				TargetAttributes = {
+					5A2DF76F26E7EA0400228E88 = {
+						CreatedOnToolsVersion = 12.5.1;
+					};
+					5A2DF78626E7EA0500228E88 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 5A2DF76F26E7EA0400228E88;
+					};
+					5A2DF79126E7EA0500228E88 = {
+						CreatedOnToolsVersion = 12.5.1;
+						TestTargetID = 5A2DF76F26E7EA0400228E88;
+					};
+				};
+			};
+			buildConfigurationList = 5A2DF76B26E7EA0400228E88 /* Build configuration list for PBXProject "bancoAlimentosJueguitos" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5A2DF76726E7EA0400228E88;
+			productRefGroup = 5A2DF77126E7EA0400228E88 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5A2DF76F26E7EA0400228E88 /* bancoAlimentosJueguitos */,
+				5A2DF78626E7EA0500228E88 /* bancoAlimentosJueguitosTests */,
+				5A2DF79126E7EA0500228E88 /* bancoAlimentosJueguitosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5A2DF76E26E7EA0400228E88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A2DF77F26E7EA0400228E88 /* Main.storyboard in Resources */,
+				5A2DF77626E7EA0400228E88 /* GameScene.sks in Resources */,
+				9879E107270B35DC000576F8 /* LeaderboardScene.sks in Resources */,
+				98AA29C2271F96F80014285B /* GameOver.sks in Resources */,
+				7486CBB22720D18400493ACD /* BAMXAppIcon120.png in Resources */,
+				9887602C2720C307005155F5 /* saved.json in Resources */,
+				5A2DF78126E7EA0500228E88 /* Assets.xcassets in Resources */,
+				9879E0EE270B2F2A000576F8 /* MenuScene.sks in Resources */,
+				7486CBB12720D18400493ACD /* BAMXAppIcon180.png in Resources */,
+				5A2DF77826E7EA0400228E88 /* Actions.sks in Resources */,
+				988760312720C310005155F5 /* situations.json in Resources */,
+				5A6DC55A2718CD0600E72DE6 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF78526E7EA0500228E88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF79026E7EA0500228E88 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20DDBBE20F024F1EB9E930BA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-bancoAlimentosJueguitos-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D9B023B1C4D41D24042FB875 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bancoAlimentosJueguitos/Pods-bancoAlimentosJueguitos-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-bancoAlimentosJueguitos/Pods-bancoAlimentosJueguitos-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-bancoAlimentosJueguitos/Pods-bancoAlimentosJueguitos-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5A2DF76C26E7EA0400228E88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5A2DF77A26E7EA0400228E88 /* GameScene.swift in Sources */,
+				9879E0FF270B30CC000576F8 /* MenuScene.swift in Sources */,
+				98AA29BD271F96C90014285B /* GameOver.swift in Sources */,
+				5A2DF77C26E7EA0400228E88 /* GameViewController.swift in Sources */,
+				9879E10C270B35FD000576F8 /* LeaderboardScene.swift in Sources */,
+				5A9E003D271E120D0020640F /* ProfileScene.swift in Sources */,
+				5A2DF77426E7EA0400228E88 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF78326E7EA0500228E88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5A2DF78E26E7EA0500228E88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A2DF78926E7EA0500228E88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A2DF76F26E7EA0400228E88 /* bancoAlimentosJueguitos */;
+			targetProxy = 5A2DF78826E7EA0500228E88 /* PBXContainerItemProxy */;
+		};
+		5A2DF79426E7EA0500228E88 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5A2DF76F26E7EA0400228E88 /* bancoAlimentosJueguitos */;
+			targetProxy = 5A2DF79326E7EA0500228E88 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		5A2DF77D26E7EA0400228E88 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5A2DF77E26E7EA0400228E88 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5A2DF79926E7EA0500228E88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5A2DF79A26E7EA0500228E88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5A2DF79C26E7EA0500228E88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7309D76168AFC46AE4C20421 /* Pods-bancoAlimentosJueguitos.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5A2DF79D26E7EA0500228E88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3ED1D7719D5451E090DF3096 /* Pods-bancoAlimentosJueguitos.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitos/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitos;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5A2DF79F26E7EA0500228E88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bancoAlimentosJueguitos.app/bancoAlimentosJueguitos";
+			};
+			name = Debug;
+		};
+		5A2DF7A026E7EA0500228E88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitosTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitosTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/bancoAlimentosJueguitos.app/bancoAlimentosJueguitos";
+			};
+			name = Release;
+		};
+		5A2DF7A226E7EA0500228E88 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = bancoAlimentosJueguitos;
+			};
+			name = Debug;
+		};
+		5A2DF7A326E7EA0500228E88 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = bancoAlimentosJueguitosUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = Tec21.bancoAlimentosJueguitosUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = bancoAlimentosJueguitos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5A2DF76B26E7EA0400228E88 /* Build configuration list for PBXProject "bancoAlimentosJueguitos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A2DF79926E7EA0500228E88 /* Debug */,
+				5A2DF79A26E7EA0500228E88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A2DF79B26E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitos" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A2DF79C26E7EA0500228E88 /* Debug */,
+				5A2DF79D26E7EA0500228E88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A2DF79E26E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A2DF79F26E7EA0500228E88 /* Debug */,
+				5A2DF7A026E7EA0500228E88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5A2DF7A126E7EA0500228E88 /* Build configuration list for PBXNativeTarget "bancoAlimentosJueguitosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5A2DF7A226E7EA0500228E88 /* Debug */,
+				5A2DF7A326E7EA0500228E88 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5A2DF76826E7EA0400228E88 /* Project object */;
+}

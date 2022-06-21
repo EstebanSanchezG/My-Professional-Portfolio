@@ -1,0 +1,253 @@
+{
+  "situation": [
+    {
+      "dialogo":[
+        "Se reporta un huracán que afectó a varios municipios cercanos", 
+        "¿Mandamos un apoyo adicional?"
+      ],
+      "left": {
+        "desc": "dar apoyo",
+        "repDiff": 0.15,
+        "npDiff": -450,
+        "perDiff": -100,
+        "moneyDiff": -500,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.001
+      },
+      "right": {
+        "desc": "no apoyar",
+        "repDiff": -0.35,
+        "npDiff": 0,
+        "perDiff": 0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0
+      },
+	  "bg": "BGNoticias"
+    },
+    {
+      "dialogo":[
+        "Nos llegó una carga demasiado grande, que probablemente no podamos recibir", "Para la comida sobrante no nos quedaría mas que deshecharla.",
+        "¿La recibimos?"
+      ],
+      "left": {
+        "desc": "recibir",
+        "repDiff": 0.1,
+        "npDiff": 300,
+        "perDiff": 700,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.01
+      },
+      "right": {
+        "desc": "rechazar",
+        "repDiff": -0.3,
+        "npDiff": 0,
+        "perDiff": 0,
+        "moneyDiff": -700,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": -0.001
+      },
+      "bg": "BGBodega"
+    },
+    {
+      "dialogo":[
+        "Nos llegó una oferta de un refrigerador industrial con costo de $10000",
+        "¿La recibimos?"
+      ],
+      "left": {
+        "desc": "aceptar",
+        "repDiff": 0.05,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": -10000,
+        "modifierMaxnp": 800,
+        "modifierMaxper": 400,
+        "modifierPereTrash": 0.05,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+        
+      },
+      "right": {
+        "desc": "rechazar",
+        "repDiff": -0.25,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "bg": "BGILoveRefrigirators"
+    },
+    {
+      "dialogo":[
+        "Una comunidad nos pidió un apoyo para celebrar un cumpleaños.",
+        "¿Apoyamos?"
+      ],
+      "left": {
+        "desc": "apoyar",
+        "repDiff": 0.02,
+        "npDiff": 0,
+        "perDiff": -5,
+        "moneyDiff": -100,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "right": {
+        "desc": "ignorar",
+        "repDiff": -0.04,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": -0.001
+      },
+      "bg": "BGCumpleaños"
+    },
+    {
+      "dialogo":[
+        "Encontramos una comunidad que necesita de apoyo, pero el apoyo tendría un costo inicial de $700.",
+        "¿Brindamos apoyo?"
+      ],
+      "left": {
+        "desc": "adoptar",
+        "repDiff": 0.05,
+        "npDiff": 0,
+        "perDiff": 0,
+        "moneyDiff": -700,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 1,
+        "modifierPereReceive": 0.01
+      },
+      "right": {
+        "desc": "no adoptar",
+        "repDiff": -0.1,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "bg": "BGComunidad"
+    },
+    {
+      "dialogo":[
+        "Se nos presenta la oportunidad de lanzar una campaña de publicidad con costo de $1000.",
+        "¿La lanzamos?"
+      ],
+      "left": {
+        "desc": "lanzar",
+        "repDiff": 0.25,
+        "npDiff": 0,
+        "perDiff": 0,
+        "moneyDiff": -1000,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": -0.01,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.01
+      },
+      "right": {
+        "desc": "rechazar",
+        "repDiff": -0.05,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.005,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "bg": "BGBodega"
+    },
+    {
+      "dialogo":[
+        "Se reportan lluvias intensas, por lo que las donaciones que recibimos disminuiran.",
+        "Podemos buscar apoyo adicional, pero nos costaría; o disminuir las comunidades a quienes apoyamos."
+      ],
+      "left": {
+        "desc": "buscar apoyo",
+        "repDiff": 0.0,
+        "npDiff": 20,
+        "perDiff": 100,
+        "moneyDiff": -1000,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": -0.15
+      },
+      "right": {
+        "desc": "donar menos",
+        "repDiff": -0.1,
+        "npDiff": 0.0,
+        "perDiff": 0.0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": -1,
+        "modifierPereReceive": -0.15
+      },
+      "bg": "BGBodega"
+    },
+    {
+      "dialogo":[
+        "Llegó el fin de mes y es necesario comprar alimentos no perecederos",
+        "Podemos comprar la cantidad usual del 75% de nuestra capacidad, o una cantidad reducida de 40%."
+      ],
+      "left": {
+        "desc": "75%",
+        "repDiff": 0.0,
+        "npDiff": 75,
+        "perDiff": 0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "right": {
+        "desc": "40%",
+        "repDiff": 0.0,
+        "npDiff": 40,
+        "perDiff": 0,
+        "moneyDiff": 0,
+        "modifierMaxnp": 0,
+        "modifierMaxper": 0,
+        "modifierPereTrash": 0.0,
+        "modifierComunidades": 0,
+        "modifierPereReceive": 0.0
+      },
+      "bg": "BGBodega"
+    }
+  ]
+}

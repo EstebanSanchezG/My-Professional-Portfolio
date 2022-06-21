@@ -1,0 +1,16 @@
+{
+    "reputation": 50,
+    "noPerecederos": 875,
+    "perecederos": 389,
+    "currency": 5400,
+    "maxNoPerecederos": 1000,
+    "maxPerecederos": 1000,
+    "daysLeft": 4,
+    "recibe": 0.5,
+    "comunidades": 2,
+    "throwaway": 0.05,
+    "perecederosThrowaway": 0,
+    "noPerecederosThrowaway": 0,
+    "donated": 0,
+    "rounds": 1
+}
