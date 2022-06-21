@@ -1,0 +1,45 @@
+.requestCont {
+    background-color: rgb(237, 237, 237);
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-left: 100px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
+
+.pageTitle {
+    margin-left: 50px;
+    margin-top: 50px;
+    margin-bottom: 15px;
+}
+
+.dropdownSelectStatusView {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: 15px 0px;
+}
+
+.buttonInfoRequest {
+    padding: 10px 25px;
+    background-color: #1064fc;
+    text-decoration: none;
+    color: white;
+}
+
+.buttonInfoRequest:hover {
+    background-color: #0854ec;
+}
+
+
+.dropdownSelectStatus {
+    width: 25vh;
+}
+
+.statusFilterText {
+    font-size: 20px;
+    margin-right: 10px;
+}
