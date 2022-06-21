@@ -1,0 +1,956 @@
+:root {
+    --Blue1: #333147;
+    --Blue2: #041E42;
+    --Blue3: #6E7CA0;
+    --Blue4: #B3B0C4;
+
+    --Gray1: #E3E5E3;
+    --Gray2: #C8C9C7;
+    --Gray3: #A7A8AA;
+
+    --YO1: #EAB330;
+    --YO2: #FFBF3F;
+    --YO3: #F2C75E;
+    --YO4: #F8E08E;
+
+    --Coral1: #D5665F;
+    --Coral2: #E8927C;
+    --Coral3: #EAA794;
+    --Coral4: #E6BAA8;
+
+    --Magenta1: #CA0088;
+    --Magenta2: #DF1995;
+    --Magenta3: #F277C6;
+    --Magenta4: #DCB6C9;
+
+    --Gradiente: linear-gradient(0.25turn, var(--YO1), var(--Magenta1));
+}
+
+* {
+    color: white;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--Blue1);
+}
+
+/*  ---Navigation---
+ Important stuff
+    Remaining width: https://www.sitepoint.com/community/t/specific-fill-remaining-width/237897/2
+    Flex: https://www.w3schools.com/cssref/css3_pr_flex.asp
+*/
+nav {
+    display: flex;
+}
+
+nav:after,
+.DontMove:after,
+header:after,
+.dashbord:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--Gray1);
+    display: block;
+    padding: 15px;
+    float: left;
+    border-bottom: solid 2px var(--Gray3);
+    border-left: solid 1px var(--Gray3);
+    border-right: solid 1px var(--Gray3);
+    position: relative;
+}
+
+.left-menu {
+    float: left;
+}
+
+.filler {
+    overflow: hidden;
+    flex: 1 0 0;
+    height: auto;
+    padding: 15px;
+    border-bottom: solid 2px var(--Gray3);
+}
+
+.NavFirst {
+    border-right: solid 1px var(--Gray3);
+    border-left: 0;
+    border-bottom: solid 2px var(--Gray3);
+}
+
+.NavActive {
+    border-bottom: 0;
+}
+
+.NavActive#OwnCases,
+.NavActive#OwnCases path {
+    color: var(--YO1);
+    fill: var(--YO1);
+}
+
+.NavActive#OthersCases,
+.NavActive#OthersCases path {
+    color: var(--Coral1);
+    fill: var(--Coral1);
+}
+
+.NavActive#UserManager,
+.NavActive#UserManager path {
+    color: var(--Magenta1);
+    fill: var(--Magenta1);
+}
+
+.NavActive#Dashboard,
+.NavActive#Dashboard path {
+    color: var(--YO1);
+    fill: var(--YO1);
+}
+
+.NavActive#OwnCases .bar {
+    background-color: var(--YO1);
+}
+
+.NavActive#OthersCases .bar {
+    background-color: var(--Coral1);
+}
+
+.NavActive#UserManager .bar {
+    background-color: var(--Magenta1);
+}
+
+.NavActive#Dashboard .bar {
+    background-color: var(--YO1);
+}
+
+.NavLast {
+    border-right: 0;
+}
+
+.NavActive.NavLast {
+    border-right: solid 2px var(--Gray3);
+}
+
+.NavFirst.NavActive {
+    border-right: solid 1px var(--Gray3);
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.DontMove {
+    background-color: var(--Blue1);
+    position: sticky;
+    top: calc(2em + 20px);
+    z-index: 99;
+}
+
+.bar {
+    position: absolute;
+    bottom: 8px;
+    display: block;
+    width: 80%;
+    margin: 0 auto;
+    height: 3px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+/*  ---Filters & Buttons    */
+.Button {
+    text-decoration: none;
+    color: var(--Blue1);
+    font-weight: 700;
+    font-size: 20px;
+
+    border-radius: 20px;
+    background: var(--Gradiente);
+    padding: 10px 20px;
+    margin: 10px 15px;
+
+    float: right;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    padding: 10px 5px 10px 20px;
+    margin-left: 5px;
+
+    color: #eab230;
+
+    background-color: transparent;
+    border: none;
+    border-bottom: solid 2px var(--Magenta1);
+}
+
+.SearchBar {
+    margin: 10px 15px;
+    float: right;
+}
+
+.FilterSelect {
+    margin: 10px 15px;
+    float: right;
+}
+
+.FilterSelect svg,
+.SearchBar svg {
+    padding: 10px 0;
+}
+
+.Filters {
+    min-height: 5px;
+}
+
+/*  ---Manage users 
+ Important
+    Switch slider: https://www.w3schools.com/howto/howto_css_switch.asp
+*/
+.wrap {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.EmailInput input {
+    margin-right: 10px;
+}
+
+.Emploee {
+    margin-top: 50px;
+    text-align: center;
+    width: 100%;
+    border: solid 2px white;
+    color: white;
+    border-radius: 30px;
+    position: relative;
+}
+
+.Emploee+.Emploee {
+    margin-top: 25px;
+}
+
+.EmploeeMail,
+.AreaSelect,
+.FocalSwitch,
+.AdminSwitch,
+.ManageSwitch {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 0 10px;
+}
+
+.EmploeeMail {
+    padding: 10px 10px;
+}
+
+.FocalSwitch,
+.AdminSwitch,
+.ManageSwitch {
+    vertical-align: middle;
+}
+
+.EmploeeMail svg,
+.EmailInput svg {
+    width: 3em;
+    height: 3em;
+}
+
+.FocalSwitch span,
+.AdminSwitch span,
+.ManageSwitch span {
+    display: block;
+    color: white;
+}
+
+select.AreaSelect {
+    padding: 10px 25px;
+    margin-left: 5px;
+
+    color: #eab230;
+
+    background-color: var(--Blue1);
+    min-width: 200px;
+    border: none;
+    border-bottom: solid 2px var(--Magenta1);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 2em;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--Gray3);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: calc(2em - 6px);
+    width: calc(2em - 6px);
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:hover:before {
+    background-color: var(--Blue1);
+}
+
+input:checked+.slider {
+    background-color: var(--Magenta1);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+.container {
+    position: relative;
+    width: 70%;
+    margin: 0 auto;
+    min-height: calc(100vh - (2em + 20px));
+    border-left: solid 2px var(--Gray3);
+}
+
+.FlexCenter {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.case {
+    width: calc(30% - 40px);
+    padding: 20px;
+    margin: 8px 0;
+    position: relative;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.411);
+    border-radius: 20px;
+}
+
+.darker {
+    background-color: rgba(0, 0, 0, 0.411);
+}
+
+.NewCase {
+    border: solid 5px rgb(202, 35, 35);
+}
+
+.OpenCase {
+    border: solid 5px rgb(35, 202, 35);
+}
+
+.ClosedCase {
+    border: solid 5px var(--Gray3);
+}
+
+.Atribute {
+    height: 1em;
+    color: white;
+}
+
+.Atribute+.Atribute {
+    height: 1em;
+    margin-top: 15px;
+}
+
+.Atribute span {
+    font-weight: 700;
+}
+
+.Atribute.Message {
+    height: 6em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.Atribute.NoCut {
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ManageCase {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.ExpandCase {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+}
+
+.ExpandCase path,
+.ManageCase path {
+    fill: white;
+}
+
+/*  ---Feedback */
+.Questions {
+    width: 90%;
+    margin: 0 auto;
+}
+.AreaSubarea{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.QuestionArea {
+    padding-top: 20px;
+    width: 45%;
+}
+/*      --- Todo Centrado   */
+.QuestionSubarea{
+    padding-top: 20px;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.QuestionSubarea select{
+    width: 45%;
+    margin-left: 50px;
+}
+/**/
+
+/*      --- Todo Arriba
+.QuestionSubarea{
+    padding-top: 20px;
+    width: 45%;
+}
+.CenterSelect{
+    padding-left: 50px;
+}
+/**/
+/*      --- Texto Arriba : Select Centrado -> Necesita un div en el html
+.QuestionSubarea{
+    padding-top: 20px;
+    width: 45%;
+}
+.CenterSelect{
+    margin-left: 50px;
+    width: calc(100% - 50px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+/**/
+.QuestionArea,
+.QuestionSubarea,
+.QuestionMessageType {
+    margin-bottom: 2.5em;
+}
+
+.QuestionMessage,
+.FinishButton {
+    padding-bottom: 2.5em;
+    width: 100%;
+}
+
+input[type=radio] {
+    text-decoration: none;
+}
+
+.LeftPadd {
+    padding-left: 50px;
+    margin-top: 10px;
+}
+.CenterStuff{
+    width: calc(100% - 100px);
+    margin-left: 50px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.QuestionMessage textarea {
+    background-color: var(--Blue4);
+    border: none;
+    padding: 15px 20px;
+    border-radius: 20px;
+    width: calc(100% - 40px);
+    color: black;
+}
+
+.radioB {
+    display: block;
+    position: relative;
+    margin-bottom: 0px;
+    padding: 10px 35px;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.radioB input,
+.radioBox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.radioBox{
+    margin: 10px;
+}
+
+.radioB:hover input~.checkmark,
+.radioBox:hover input~.checkbox {
+    background: var(--Magenta1);
+}
+
+.radioB input:checked~.checkmark,
+.radioBox input:checked~.checkbox {
+    background: var(--Gradiente);
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2em;
+    width: 2em;
+    margin: 4px 0;
+    background-color: var(--Gray1);
+    border-radius: 50%;
+}
+
+.QuestionMessageType .radioBox {
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.checkbox {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: var(--Gray1);
+    border-radius: 10px;
+}
+
+.QuestionMessageType label {
+    color: var(--Blue1);
+}
+
+.CancelButton svg,
+.ReturnButton svg {
+    width: 2.5em;
+    height: 2.5em;
+
+}
+
+.CancelButton svg:hover path {
+    fill: red;
+}
+
+.ReturnButton:hover a,
+.ReturnButton:hover path {
+    fill: var(--Coral1);
+    color: var(--Coral1);
+
+}
+
+.ReturnButton a {
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.ReturnButton {
+    display: inline-block;
+}
+
+.Resume {
+    width: 90%;
+    margin: 0 auto;
+    padding-top: 30px;
+}
+
+.CancelButton {
+    position: fixed;
+    top: calc(2em + 50px);
+    right: calc(15% + (63% / 100) + 2.5em);
+}
+
+.CancelButton button {
+    background-color: transparent;
+    border: none;
+}
+
+.FinishButton button,
+.FinishButton a {
+    text-decoration: none;
+    border: none;
+    color: var(--Blue1);
+    font-weight: 700;
+    font-size: 20px;
+
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: 0 auto;
+    background: var(--Gradiente);
+
+    float: right;
+    cursor: pointer;
+}
+
+.FinishButton {
+    overflow: hidden;
+}
+
+.Resume h1 {
+    margin-top: 1em;
+    margin-bottom: 15px;
+}
+
+.GeneralResume {
+    width: calc(90% - 60px);
+    padding: 20px 30px;
+    margin: 0 auto;
+    margin-bottom: 3em;
+    border-radius: 20px;
+    background-color: rgba(0, 0, 0, 0.411);
+}
+
+/*  ---Login    */
+.login {
+    width: 30%;
+    padding: 80px 0;
+    margin: 0 auto;
+    background-color: rgba(0, 0, 0, 0.411);
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.5) 10px 10px;
+}
+
+.login img {
+    margin: 0 auto;
+    display: block;
+    width: 35%;
+}
+
+.LogMail,
+.LogPass {
+    margin: 50px auto;
+    display: block;
+    width: max-content;
+}
+
+.LoginButton button,
+.LoginButton a {
+    text-decoration: none;
+    border: none;
+    color: var(--Blue1);
+    font-weight: 700;
+    font-size: 20px;
+
+    border-radius: 20px;
+    padding: 10px 20px;
+
+    background: var(--Gradiente);
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.411) 7px 7px;
+}
+
+.LoginButton {
+    margin: 0 auto;
+    width: max-content;
+}
+
+.VerCenter {
+    height: calc(100vh);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/*  ---Header   */
+header#Header {
+    background: var(--Gradiente);
+    height: calc(2em + 20px);
+    top: 0;
+}
+
+header img {
+    float: left;
+    height: 2em;
+    padding: 10px 20px;
+}
+
+header .User,
+header .UserInfo,
+header .UserIcon {
+    float: right;
+}
+
+.NavWrap {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.UserInfo {
+    padding: 17px 20px;
+}
+
+.UserInfo span {
+    width: max-content;
+    display: block;
+}
+
+.bi-person-fill {
+    width: 2em;
+    height: 2em;
+    padding: 10px 20px;
+}
+
+.UserIcon {
+    position: relative;
+    display: inline-block;
+}
+
+.UserIcon>svg>path {
+    fill: var(--Blue1);
+}
+
+.UserIcon:hover .OptionMenu {
+    display: block;
+}
+
+.OptionMenu {
+    text-decoration: none;
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.411);
+    /*
+    border-left: solid var(--Gray2) 2px;
+    border-right: solid var(--Gray2) 2px;
+    border-bottom: solid var(--Gray2) 2px;
+    /**/
+    border-radius: 0 0 10px 10px;
+    padding: 12px 16px;
+    width: max-content;
+    z-index: 1;
+    padding: 15px 20px;
+}
+
+.OptionMenu span {
+    text-decoration: none;
+    padding-left: 10px;
+}
+
+/**/
+footer {
+    margin-top: 20px;
+}
+
+main {
+    clear: both;
+}
+
+svg {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+svg path {
+    fill: white;
+}
+
+h1 {
+    font-size: 1.6em;
+}
+
+/*  ---DAshBoard    */
+.dashbord {
+    width: 95%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+}
+
+canvas {
+    padding: 30px;
+    display: inline-block;
+}
+
+.Column {
+    width: 40vw;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.WrapElement {
+    margin: 20px 0;
+    border: solid 2px white;
+    color: white;
+    border-radius: 30px;
+    position: relative;
+}
+
+.WrapMessage {
+    width: 44%;
+    margin: 20px 0;
+    border: solid 2px white;
+    color: white;
+    border-radius: 30px;
+    position: relative;
+}
+
+.Collapse {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    width: 100%;
+}
+
+.Collapse svg {
+    cursor: pointer;
+}
+
+.ManageElement {
+    float: left;
+    box-sizing: border-box;
+    display: flex;
+    transition: all 1s;
+}
+
+.FlexCenter:after {
+    clear: both;
+}
+
+.ManageReduced {
+    width: 30%;
+}
+
+.ManageMaxed {
+    display: flex;
+    width: 100%;
+}
+
+.WrapSubelement {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 90%;
+    margin: 6px auto;
+    border: solid 2px white;
+    color: white;
+    border-radius: 30px;
+    position: relative;
+}
+
+.AreaData {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+span.WrapElement:hover,
+span.WrapSubelement:hover {
+    background: var(--Gradiente);
+    border: solid 2px var(--Blue1);
+}
+
+span.WrapElement:hover path {
+    fill: var(--Blue1);
+}
+
+.ManageTitle {
+    width: 50%;
+}
+
+.ManageTitle2 {
+    width: 50%;
+    padding: 10px 0;
+}
+
+.AddElement {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.AddElement span{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    height: 50%;
+}
+.AddElement input{
+    width: 40%;
+}
+
+.WrapSubelement.AddElement {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 90%;
+}
+
+.Rotate180 {
+    transform: rotate(180deg);
+}
+
+.hide {
+    width: 0;
+    height: 0;
+    display: none;
+}
