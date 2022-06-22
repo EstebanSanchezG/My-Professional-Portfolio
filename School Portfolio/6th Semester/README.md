@@ -4,7 +4,7 @@ This project came about when IBM asked students to pithc a possible new Peripher
 being lent to employees in the office. it helps keep track of who has what device and whom are authorized to have a device. 
 
 For this project, we used React. I acted as Team Leader, and worked on:
-  - Frontend creation (about 50% of all sites visited)
+  - Frontend creation (about 50% of all sites visited) using React
   - CSS for each page.
   - Security
   - Routing
