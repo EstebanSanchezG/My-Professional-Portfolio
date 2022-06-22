@@ -1,4 +1,4 @@
-# Estban Sanchez' Professional Portfolio
+# Esteban Sanchez' Professional Portfolio
 ========================================
 
 This is **my portfolio**, it contains files and projects I've worked on either as a team or on my own since 2021. Everything from school projects, contract projects, works done for quick courses, competitions, or just personal stuff I feel gives a good impression of my skills.
