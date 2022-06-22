@@ -14,7 +14,6 @@ This is **my portfolio**, it contains files and projects I've worked on either a
 
 Not all my social media is considered professional, just another way to stay in touch.
 
-  - **Twitter:** @RealN_Hood
   - **Instagram:** steve_sancheznh
   - **Linkedin:** esteban-sanchez-51284b229
 ------------------
