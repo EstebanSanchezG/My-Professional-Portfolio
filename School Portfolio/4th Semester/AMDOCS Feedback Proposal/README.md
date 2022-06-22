@@ -1,4 +1,4 @@
-# GDA.TC2005B.2.2111.11724_Feedback5
+# AMDOCS Feedback Proposal
 
     [[[[[[[[[TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT]]]]]]]]]
     [:::::::[T:::::::::::::::::::::TT:::::::::::::::::::::T]:::::::]
@@ -17,3 +17,5 @@
     [:::::::[      T:::::::::T            T:::::::::T      ]:::::::]
     [[[[[[[[[      TTTTTTTTTTT            TTTTTTTTTTT      ]]]]]]]]]
                                                                 
+
+This was made in a team called Tsurus Tuneados. I was incharge of UX and UI modelling. As well as Database planning. I didn't write much of the code in js nor html, instead, I worked more closely to CSS for this project.
