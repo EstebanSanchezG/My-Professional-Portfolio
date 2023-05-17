@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/render.css') }}">
+</head>
+
+<body>
+    <div id="nav-bar">
+        <nav>
+            <a id="return" href="{{url_for('index') }}">&lt; Return</a>
+        </nav>
+    </div>
+    <div id="webgl">  
+        <!-- Imports for external ThreeJS addons -->
+        <!-- Any new addition should be added following this format -->
+        <script src="{{url_for('static', filename='./ThreeJS/three.min.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/OrbitControls.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/TerrainLoader.js')}}"></script>
+       
+        
+        <!-- Three JS map rendering script-->
+        
+        <script>
+
+            /* Window size. Set to whatever 
+            the users window size is at the time */
+
+            var width  = window.innerWidth,
+            height = window.innerHeight;
+
+            // Create Scene
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(width, height);
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color( 0xADD8E6 ); // Can be seen as the "Skybox". Color of the background
+
+            const axes = new THREE.AxesHelper(200); // Adds axes colors to scene. 
+            
+            scene.add(axes);
+
+            const light = new THREE.DirectionalLight( 0xffffff );
+            light.position.set( 0, 1, 1 ).normalize();
+            scene.add(light);
+
+            const camera = new THREE.PerspectiveCamera(90, width / height, 1, 500000);
+            camera.position.set(450670, 127445, 600);
+            camera.up.set(0,0,10);
+
+           
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.target = new THREE.Vector3(449623,128215, 0)
+            controls.update()
+
+            // function animate() {
+            //     requestAnimationFrame( animate );
+
+            //     controls.update();
+
+            //     renderer.render( scene, camera)
+            // }
+
+            var vertexArray = new Array();
+            var buildingArray = new Array();
+            var xarray = new Array();
+                var yarray = new Array();
+            var count=0;
+            var terrainLoader = new THREE.TerrainLoader();
+            terrainLoader.load('../static/assets/Aden/aden.bin', function(data) {
+
+                const sizeX = 377
+                const sizeY = 277 
+                
+                var geometry = new THREE.PlaneGeometry(sizeX*5.46, sizeY*5.46, sizeX-1, sizeY-1);
+
+                for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+                    geometry.vertices[i].z = data[i] / 65535 * 100;
+                    vertexArray.push(geometry.vertices[i]); 
+                
+                    
+                }
+               
+                // var material = new THREE.MeshPhongMaterial({
+                //     color: 0x000000, 
+                //     wireframe: true
+                // });
+
+                var texture = new THREE.TextureLoader().load( '../static/assets/Aden/adenimage.jp2' );
+
+                var material = new THREE.MeshBasicMaterial({
+                    map: texture
+                });
+
+                var plane = new THREE.Mesh(geometry, material);
+                plane.position.set(449623.609,128215.280,0);
+                
+                scene.add(plane);
+                console.log(plane);
+               
+                for(var t=0; t<vertexArray.length;t++ ){
+                    xarray.push(vertexArray[t].x+449623.609);
+                    yarray.push(vertexArray[t].y+128215.280);
+                   
+                    
+                }
+                console.log(xarray);
+               
+                console.log(geometry);
+                console.log(count);
+
+            });
+            
+
+            const lowLeft = new THREE.BoxGeometry( 1, 1, 100 );
+            const lowLeftMat = new THREE.MeshBasicMaterial( {color: 0x000000} );
+            const lLcube = new THREE.Mesh( lowLeft, lowLeftMat );
+            lLcube.position.set(448576.389, 127445.837, 50)
+            scene.add( lLcube );
+
+
+            const upRight = new THREE.BoxGeometry( 1, 1, 100 );
+            const upRightMat = new THREE.MeshBasicMaterial( {color: 0x000000} );
+            const uRcube = new THREE.Mesh( upRight, upRightMat );
+            uRcube.position.set(45.0670829*10000, 12.8984722*10000, 50)
+            scene.add( uRcube );
+
+            fetch('../static/assets/Aden/aden-buildings.geojson')
+                .then((response) => response.json())
+                .then(datas);
+            const group = new THREE.Group();
+            function datas(json) {
+                for (let i = 0; i < json.features.length; i++) {
+                    var building =json.features[i].geometry.coordinates[0];
+                    if(building[0].length>4){
+
+        
+                        var shapePts = [];
+                        shapePts.push( new THREE.Vector2 ( (building[0][0][0])*10001.2, (building[0][0][1])*10007) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][1][0])*10001.2, (building[0][1][1])*10007) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][2][0])*10001.2, (building[0][2][1])*10007) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][3][0])*10001.2, (building[0][3][1])*10007) );
+                    }
+                    
+                    var shapesquare = new THREE.Shape(shapePts);
+                    var extrudeSettings = {
+                        steps: 1,
+                        amount:1,
+                        bevelEnabled:false,
+                        bevelSegments:2
+                    }; // bevelSegments: 2, steps: 2 , bevelSegments: 5, bevelSize: 8, bevelThickness:5
+                    var geometry2 = new THREE.ExtrudeGeometry(shapesquare, extrudeSettings);    
+
+                    var counter = 0;
+
+                    const material2 = new THREE.MeshBasicMaterial( { color: 0xfff0 } );
+                    const buildings = new THREE.Mesh( geometry2, material2 ) ;
+                    for (var p = 0, l = vertexArray.length; p < l; p++){
+                         for(var k=0; k <8;k++){
+                            if ((xarray[p]<=buildings.geometry.vertices[k].x+2.5
+                            & xarray[p]>=buildings.geometry.vertices[k].x-2.5)
+                            & (yarray[p]<=buildings.geometry.vertices[k].y+2.5
+                            & yarray[p]>=buildings.geometry.vertices[k].y-2.5)){ 
+                                buildings.position.z = vertexArray[p].z;
+                                counter = counter + 1;
+                            }
+                            
+                        }                                                       
+                }
+                
+                    buildingArray.push(buildings.position)
+                    group.add(buildings);
+                    
+                }
+            group.position.set(0,0,0)
+            
+               
+            //testing
+              
+            console.log("Times Buildings changed elevation: ",counter);
+            }
+            
+            scene.add(group);
+            console.log(group);
+            console.log(count)
+            // controls.enableDamping = true;
+            // controls.dampingFactor = 0.05;
+            // controls.zoomSpeed= 0.001; 
+            // controls.panSpeed = 0.000001;
+            // controls.rotateSpeed=0.001; 
+            // controls.update();
+
+            document.getElementById('webgl').appendChild(renderer.domElement);
+
+            render();
+
+            function render() {
+                controls.update();    
+                requestAnimationFrame(render);
+                renderer.render(scene, camera);
+            }
+
+        </script>
+    </div>
+</body>
+</html>

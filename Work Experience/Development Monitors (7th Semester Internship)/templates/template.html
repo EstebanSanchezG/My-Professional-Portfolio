@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/render.css') }}">
+</head>
+
+<body>
+    <div id="nav-bar">
+        <nav>
+            <a id="return" href="{{url_for('index') }}">&lt; Return</a>
+        </nav>
+    </div>
+    <div id="webgl">  
+        <!-- Imports for external ThreeJS addons -->
+        <!-- Any new addition should be added following this format -->
+        <script src="{{url_for('static', filename='./ThreeJS/three.min.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/OrbitControls.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/TerrainLoader.js')}}"></script>
+       
+        
+        <!-- Three JS map rendering script-->
+        
+        <script>
+
+            /* Window size. Set to whatever 
+            the users window size is at the time */
+
+            var width  = window.innerWidth,
+            height = window.innerHeight;
+
+            // Create Scene
+            const renderer = new THREE.WebGLRenderer();
+            renderer.setSize(width, height);
+
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color( 0xADD8E6 ); // Can be seen as the "Skybox". Color of the background
+
+            //XYZ axes 
+
+            const axes = new THREE.AxesHelper(200); 
+            
+            scene.add(axes);
+
+            //Light
+
+            const light = new THREE.DirectionalLight( 0xffffff );
+            light.position.set( 0, 1, 1 ).normalize();
+            scene.add(light);
+
+            //Camera
+
+            const camera = new THREE.PerspectiveCamera(60, width / height, 1, 1000);
+            camera.position.set(439637, 136054, 100);
+            camera.up.set(0,0,10);
+
+            //OrbitControls
+
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.target = new THREE.Vector3(439891, 135840, 0)
+            controls.update()
+
+            //In case there will be a special animation
+
+            // function animate() {
+            //     requestAnimationFrame( animate );
+
+            //     controls.update();
+
+            //     renderer.render( scene, camera)
+            // }
+
+            var vertexArray = new Array(); //Array for saving coordinates of vertices in plane
+            var buildingArray = new Array(); //Array for the buildings
+            var xarray = new Array(); //x coordinate Array for each segment vertex of plane
+            var yarray = new Array(); //y coordinate Array for each segment vertex of plane
+            
+            var count=0;
+
+            //Generate Terrain
+
+            var terrainLoader = new THREE.TerrainLoader();
+            terrainLoader.load('../static/assets/your_city.bin', function(data) {   //Add coty elevation binary file here
+              
+                const sizeX = 154
+                const sizeY = 183 
+
+                var geometry = new THREE.PlaneGeometry(sizeX*3.5, sizeY*3.5, sizeX-1, sizeY-1); //(X size, Y size, X segments, Y Segments)
+
+                for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+                    geometry.vertices[i].z = data[i] / 65535 * 10000;
+                    vertexArray.push(geometry.vertices[i]); 
+                
+                    
+                }
+               
+                //Wireframe - Comment code if you will use satellite image
+
+                var material = new THREE.MeshPhongMaterial({
+                    color: 0x000000, 
+                    wireframe: true
+                });
+
+                //Image Texture - Comment var material code if using wireframe
+
+                var texture = new THREE.TextureLoader().load( '../static/assets/yourcity.png' ); //Satellite Image goes here, can be png, jpeg, or jp2
+
+                // var material = new THREE.MeshBasicMaterial({
+                //     map: texture
+                // });
+
+                var plane = new THREE.Mesh(geometry, material);
+                plane.position.set(439900,135859,0); //Center or Origin Coordinate
+                
+                scene.add(plane);
+                console.log(plane);
+               
+                for(var t=0; t<vertexArray.length;t++ ){
+                    xarray.push(vertexArray[t].x+439900);
+                    yarray.push(vertexArray[t].y+135859);
+                   
+                    
+                }
+                console.log(xarray);
+               
+                console.log(geometry);
+                console.log(count);
+
+            });
+
+            fetch('../static/assets/your_city.geojson') //Add geojson building file here
+                .then((response) => response.json())
+                .then(datas);
+            const group = new THREE.Group();
+            function datas(json) {
+                for (let i = 0; i < json.features.length; i++) {
+                    var building =json.features[i].geometry.coordinates[0];
+                    if(building[0].length>4){
+
+        
+                        var shapePts = [];
+                        shapePts.push( new THREE.Vector2 ( (building[0][0][0])*10000, (building[0][0][1])*10000 ) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][1][0])*10000, (building[0][1][1])*10000) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][2][0])*10000, (building[0][2][1])*10000 ) );
+                        shapePts.push( new THREE.Vector2 ( (building[0][3][0])*10000, (building[0][3][1])*10000) );
+                    }
+                    
+                    var shapesquare = new THREE.Shape(shapePts);
+                    var extrudeSettings = {
+                        steps: 1,
+                        amount:1,
+                        bevelEnabled:false,
+                        bevelSegments:2
+                    }; // bevelSegments: 2, steps: 2 , bevelSegments: 5, bevelSize: 8, bevelThickness:5
+                    var geometry2 = new THREE.ExtrudeGeometry(shapesquare, extrudeSettings);
+                    
+
+                    var counter = 0;
+
+                    const material2 = new THREE.MeshBasicMaterial( { color: 0xfff0 } );
+                    const buildings = new THREE.Mesh( geometry2, material2 ) ;
+                    for (var p = 0, l = vertexArray.length; p < l; p++){
+                         for(var k=0; k <8;k++){
+                            if ((xarray[p]<=buildings.geometry.vertices[k].x+2.5
+                            & xarray[p]>=buildings.geometry.vertices[k].x-2.5)
+                            & (yarray[p]<=buildings.geometry.vertices[k].y+2.5
+                            & yarray[p]>=buildings.geometry.vertices[k].y-2.5)){
+                                
+                                buildings.position.z = vertexArray[p].z;
+                                counter = counter + 1;
+                            }
+                            
+                        }
+                            
+                           
+                }
+                
+                    buildingArray.push(buildings.position)
+                    group.add(buildings);
+                    
+
+                    
+                }
+            
+            // testing
+              
+            // console.log("Times Buildings changed elevation: ",counter);
+            }
+            
+            scene.add(group);
+            // console.log(group);
+            // console.log(count)
+            
+
+            document.getElementById('webgl').appendChild(renderer.domElement);
+
+            render();
+
+            function render() {
+                controls.update();    
+                requestAnimationFrame(render);
+                renderer.render(scene, camera);
+            }
+
+        </script>
+    </div>
+</body>
+</html>

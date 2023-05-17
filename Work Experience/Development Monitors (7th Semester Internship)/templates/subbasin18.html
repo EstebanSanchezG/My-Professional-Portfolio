@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basin-18</title>
+    <style>
+        
+    </style>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/render.css') }}">
+</head>
+
+<body>
+    <div id="nav-bar">
+        <nav>
+            <a id="return" href="{{url_for('index') }}">&lt; Return</a>
+        </nav>
+    </div>
+    <div id="webgl">  
+        <!-- Imports for external ThreeJS addons -->
+        <!-- Any new addition should be added following this format -->
+        <script src="{{url_for('static', filename='./ThreeJS/three.min.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/OrbitControls.js')}}"></script>
+        <script src="{{url_for('static', filename='./ThreeJS/TerrainLoader.js')}}"></script>
+        <script src="{{url_for('static', filename='./assets/node_modules/geolib/lib/index.js')}}"></script>
+       
+        
+        <!-- Three JS map rendering script-->
+        
+        <script>
+
+            var renderer, scene, camera, controls;
+            var width  = window.innerWidth, height = window.innerHeight;
+            const terrain = "../static/assets/Subbasin/sub.bin", geoJson = "../static/assets/Subbasin/buildings.geojson";
+            const riskLayer = "../static/assets/Subbasin/flood.bin";
+            const riskLayerImage = "../static/assets/Aden/output.png";
+            const segmentX = 560, segmentY = 400
+            const upperRight = [44.5401389,  15.4704167]; lowerLeft = [44.2281944,  15.2487500];
+            const center = [median([upperRight[0], lowerLeft[0]]), median([upperRight[1], lowerLeft[1]])];
+            var sizeX = calculateSize()[0], sizeY = calculateSize()[1];
+            const satImage = "../static/assets/Subbasin/subview.jpeg";
+            var vertexArray = new Array(), buildingArray = new Array();
+            var xarray = new Array(), yarray = new Array();
+            var boolArray = new Array();
+            var vertexArraynew = new Array(), transparentArray = new Array();
+            var centerTerrainX, centerTerrainY;
+            var count = 0; var counter = 0;
+
+            startMap();
+
+            function startMap(){
+                renderer = new THREE.WebGLRenderer();
+                renderer.setSize(width, height);
+
+                scene = new THREE.Scene();
+                scene.background = new THREE.Color( 0x222222); // Can be seen as the "Skybox". Color of the background
+
+                // let gridHelper = new THREE.GridHelper(100, 160, 
+                // new THREE.Color(0x555555), new THREE.Color(0x333333))
+                // scene.add(gridHelper)
+
+                // const axes = new THREE.AxesHelper(20); // Adds axes colors to scene. 
+                // scene.add(axes);
+
+                const light = new THREE.DirectionalLight( 0xffffff );
+                light.position.set( 0, 1, 1 ).normalize();
+                scene.add(light);
+
+                camera = new THREE.PerspectiveCamera(90, width / height, 1, 500000);
+                camera.position.set(44, 200, 12);
+            
+                controls = new THREE.OrbitControls(camera, renderer.domElement);
+                controls.target = new THREE.Vector3(44, 0, 12)
+                controls.update()
+
+                // function animate() {
+                //     requestAnimationFrame( animate );
+
+                //     controls.update();
+
+                //     renderer.render( scene, camera)
+                // }
+
+                genTerrain();
+                genRiskLayer();
+                GetGeoJson();
+                render();
+
+            }
+
+            function genTerrain(){
+                var terrainLoader = new THREE.TerrainLoader();
+                terrainLoader.load(terrain, function(data) {
+                    
+                    var geometry = new THREE.PlaneGeometry(sizeX, sizeY, segmentX-1, segmentY-1);
+
+                    for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+                        geometry.vertices[i].z = data[i] / 65535 * 20 ;
+                        vertexArray.push(geometry.vertices[i]); 
+                    }
+                    //compare();
+                    //console.log(vertexArray)
+                    geometry.rotateX(Math.PI / 2);
+                    geometry.rotateZ(Math.PI);
+
+                    // var material = new THREE.MeshPhongMaterial({
+                    //     color: 0x00ff00, 
+                    //     wireframe: true
+                    // });
+
+                    var texture = new THREE.TextureLoader().load(satImage);
+
+                    var material = new THREE.MeshBasicMaterial({
+                       map: texture
+                       //wireframe : true,
+                        // color : 0xFFFFFF
+                    });
+
+                    var plane = new THREE.Mesh(geometry, material);
+                    plane.position.set(centerTerrainX, 0, centerTerrainY);
+                    for(var t=0; t<vertexArray.length;t++ ){
+                        xarray.push(vertexArray[t].x+centerTerrainX);
+                        yarray.push(vertexArray[t].z+centerTerrainY);
+                        //console.log(xarray[t], vertexArray[t], yarray[t])
+                    }
+                    //console.log(plane);
+                    
+                    
+                    scene.add(plane);           
+                });
+            }
+
+            function genRiskLayer(){
+                var terrainLoader = new THREE.TerrainLoader();
+                terrainLoader.load(riskLayer, function(data) {
+                    
+                    var geometry = new THREE.PlaneGeometry(sizeX, sizeY,segmentX-1, segmentY-1);
+                    for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+                        geometry.vertices[i].z = data[i] / 65535 * 20;
+                        vertexArraynew.push(geometry.vertices[i]); 
+                    }
+                    geometry.rotateX(Math.PI / 2);
+                    geometry.rotateZ(Math.PI);
+
+                    var texture = new THREE.TextureLoader().load(riskLayerImage);
+
+                    var material = new THREE.MeshBasicMaterial({
+                       transparent: true,
+                       map: texture,
+                    // color: 0xFFFFFF,
+                    // wireframe: true
+                 });
+
+                    var plane = new THREE.Mesh(geometry, material);
+                    plane.position.set(centerTerrainX, 0, centerTerrainY);                    
+                    scene.add(plane);           
+                });
+            }
+
+            // function compare(){
+            //     for (var i = 0, l = vertexArray.length; i < l; i++) {
+            //             if((vertexArraynew[i].y>=(vertexArray[i].y/100))){
+            //                 boolArray.push(true);
+            //             } 
+            //             else{boolArray.push(false);}
+            //         }
+            // }
+
+
+            function calculateSize(){
+                let disLL = window.geolib.getDistance(lowerLeft, center)
+                let bearingLL = window.geolib.getRhumbLineBearing(lowerLeft, center)
+                let xLL = -(center[0] + (disLL * Math.cos(bearingLL * Math.PI / 180)))/100
+                let yLL = (center[1] + (disLL * Math.sin(bearingLL * Math.PI / 180)))/100
+
+                //console.log(xLL, "," ,yLL)
+
+                let disUR = window.geolib.getDistance(upperRight, center)
+                let bearingUR = window.geolib.getRhumbLineBearing(upperRight, center)
+                let xUR = -(center[0] + (disUR * Math.cos(bearingUR * Math.PI / 180)))/100
+                let yUR = (center[1] + (disUR * Math.sin(bearingUR * Math.PI / 180)))/100
+
+                centerTerrainY = median([xUR,xLL]); centerTerrainX = median([yUR,yLL]);
+                let y = -(xLL-xUR); let x = -(yUR - yLL);
+                const terrainSize = [x, y] 
+                //console.log(terrainSize)
+                return terrainSize;
+            }
+
+            function median(arr){
+                if (arr.length == 0) {
+                    return; // 0.
+                }
+                arr.sort((a, b) => a - b); // 1.
+                const midpoint = Math.floor(arr.length / 2); // 2.
+                const median = arr.length % 2 === 1 ?
+                    arr[midpoint] : // 3.1. If odd length, just take midpoint
+                    (arr[midpoint - 1] + arr[midpoint]) / 2; // 3.2. If even length, take median of midpoints
+                return median;
+            }
+            
+
+            //Fetch Buildings 2nd Attempt
+
+            function GetGeoJson() {
+                fetch(geoJson).then((res) => {
+                    res.json().then((data) => {
+                        LoadBuildings(data)    
+                    })
+                })
+            }
+
+            function LoadBuildings(data) {
+                let features = data.features
+                for (let i = 0; i < features.length; i++) {
+                
+                    let fel = features[i]
+                    if (!fel['properties']) return
+
+                    if (fel.properties['building']) {
+                        addBuilding(fel.geometry.coordinates, fel.properties, fel.properties["building:levels"])
+                    }
+                }
+            }
+            
+            function addBuilding(data, info, height = 1) {
+
+                height = height ? height : 1
+
+                for (let i = 0; i < data.length; i++) {
+                    let el = data[0][i]
+
+                    let shape = genShape(el, center)
+                    let colors = shape[2];
+                    let geometry = genGeometry(shape[0], {
+                        curveSegments: 1,
+                        depth: 0.05 * height,
+                        bevelEnabled: false
+                    })
+
+                    var MAT_BUILDING = new THREE.MeshPhongMaterial({
+                            color: colors
+                    });
+
+                    geometry.rotateX(degTorad(90))
+                    geometry.rotateZ(degTorad(180))
+                    geometry.rotateY(degTorad(90))
+
+                    let mesh = new THREE.Mesh(geometry, MAT_BUILDING)
+                    mesh.position.y = shape[1]
+
+                    scene.add(mesh);
+                    
+                }
+            }
+
+            function genShape(points, center) {
+                let shape = new THREE.Shape()
+                var va;
+
+                for (let i = 0; i < points.length; i++) {
+                    let elp = points[i]
+                    elp = GPSRelativePosition(elp, center)
+                    va=elp[2];
+                    color=elp[3];
+
+                    if (i == 0) {
+                        shape.moveTo(elp[0], elp[1])
+                    } 
+                    else {
+                        shape.lineTo(elp[0], elp[1])
+                    }
+                }
+                return [shape, va, color]
+            }
+
+            function genGeometry(shape, settings) {
+                let geometry = new THREE.ExtrudeBufferGeometry(shape, settings)
+                geometry.computeBoundingBox()
+
+                return geometry
+            }
+
+            function GPSRelativePosition(objPosi, centerPosi) {
+
+                // Get GPS distance
+                let dis = window.geolib.getDistance(objPosi, centerPosi)
+
+                // Get bearing angle
+                let bearing = window.geolib.getRhumbLineBearing(objPosi, centerPosi)
+
+                // Calculate X by centerPosi.x + distance * cos(rad)
+                let x = centerPosi[0] + (dis * Math.cos(bearing * Math.PI / 180))
+
+                // Calculate Y by centerPosi.y + distance * sin(rad)
+                let y = centerPosi[1] + (dis * Math.sin(bearing * Math.PI / 180))
+                x/=-100;
+                y/=100;
+                var z=0.8;
+                var color = 'white'
+                for (var p = 0, l = vertexArray.length; p < l; p++){
+                             if ((yarray[p]<=x+5
+                             && yarray[p]>=x-5)
+                             && (xarray[p]<=y+5
+                             && xarray[p]>=y-5)){
+                                if(vertexArraynew[p].y>=vertexArray[p].y){
+                                    color='red';
+                                }
+                                
+                                 z = vertexArray[p].y;
+                                 count++;
+                                 break;
+                             }                                                       
+                    }
+                counter++;
+                console.log(x, y, counter, count, color)
+
+
+                // Reverse X (it works) 
+                return [x, y, z, color]
+            }
+
+            //console.log(vertexArray);
+
+            document.getElementById('webgl').appendChild(renderer.domElement);
+
+            function render() {
+                controls.update();    
+                requestAnimationFrame(render);
+                renderer.render(scene, camera);
+            }
+
+            function degTorad(degrees){
+                var pi = Math.PI;
+                return degrees * (pi/180);
+            }
+
+        </script>
+    </div>
+</body>
+</html>

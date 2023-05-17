@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic rendering</title>
+</head>
+
+<body>
+  <h1>Droneflight preview:</h1>
+
+  <p class="lat">{{ lat }}</p>
+  <p class="lon">{{ lon }}</p>
+
+  <button class="submit" >create files terrain</button>
+
+
+
+  <script>
+    
+    document.querySelector('.submit').addEventListener("click", function (event) {
+      event.preventDefault();
+      console.log('click')
+      const latitude = document.querySelector('.lat').innerHTML
+      const longitude = document.querySelector('.lon').innerHTML
+
+      var min_lat = latitude - 0.040;
+      var max_lat = latitude / 1 + 0.040;
+      var min_lon = longitude - 0.040;
+      var max_lon = longitude / 1 + 0.040;
+
+      var url = window.location.protocol + "//" + window.location.host + "/dem?min_lat=" + min_lat + "&max_lat=" + max_lat + "&min_lon=" + min_lon + "&max_lon=" + max_lon;
+      b_box = [min_lat, max_lat, min_lon, max_lon];
+      fetch(url)
+        .then(console.log(b_box))
+    });
+
+  </script>
+
+  <a href="{{url_for('dRenderDrone') }}">Render terrain</a>
+
+</body>
+
+</html>

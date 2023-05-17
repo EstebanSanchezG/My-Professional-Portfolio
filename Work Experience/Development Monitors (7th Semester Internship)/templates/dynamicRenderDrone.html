@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic</title>
+  <style>
+
+  </style>
+  <link rel="stylesheet" href="{{url_for('static', filename='/css/render.css') }}">
+</head>
+
+<body>
+  <div id="nav-bar">
+    <nav>
+      <a id="return" href="{{url_for('index') }}">&lt; Return</a>
+      <p>Coordinates terrain:</p>
+      <p>Min Latitude: {{ min_lat }}</p>
+      <p>Max Latitude: {{ max_lat }}</p>
+      <p>Min Longitude: {{ min_lon }}</p>
+      <p>Max Longitude: {{ max_lon }}</p> 
+      <p id="coords">[{{ min_lat }},{{ max_lat }},{{ min_lon }},{{ max_lon }}]</p>
+      <!-- <p id="coords">[37.153517473577196,37.233517473577194,-80.61824951338009,-80.53824951338008]</p> -->
+
+      <p>Coordinates drone flight:</p>
+      <p>Min Latitude: {{ min_lat_drone }}</p>
+      <p>Max Latitude: {{ max_lat_drone }}</p>
+      <p>Min Longitude: {{ min_lon_drone }}</p>
+      <p>Max Longitude: {{ max_lon_drone }}</p>
+      <p id="segments_drone">[96, {{segmentY_drone}}]</p>
+      <p id="coords_drone">[{{ min_lat_drone }},{{ max_lat_drone }},{{ min_lon_drone }},{{ max_lon_drone }}]</p> 
+      <!-- <p id="coords_drone">[37.189012245802864,37.19802270792061,-80.58398578337996,-80.57251256775018]</p>
+      <p id="segments_drone">[96, 94.2255303]</p> -->
+
+
+    </nav>
+  </div>
+  <div id="webgl">
+    <!-- Imports for external ThreeJS addons -->
+    <!-- Any new addition should be added following this format -->
+    <script src="{{url_for('static', filename='./ThreeJS/three.min.js')}}"></script>
+    <script src="{{url_for('static', filename='./ThreeJS/OrbitControls.js')}}"></script>
+    <script src="{{url_for('static', filename='./ThreeJS/TerrainLoader.js')}}"></script>
+    <script src="{{url_for('static', filename='./assets/node_modules/geolib/lib/index.js')}}"></script>
+
+
+    <!-- Three JS map rendering script-->
+
+    <script>
+
+      var coords_element = document.getElementById("coords");
+      var coords_string = coords_element.innerHTML;
+      var coords_array = JSON.parse(coords_string);
+
+      var coords_element_drone = document.getElementById("coords_drone");
+      var coords_string_drone = coords_element_drone.innerHTML;
+      var coords_array_drone = JSON.parse(coords_string_drone);
+
+      var segments_element_drone = document.getElementById("segments_drone");
+      var segments_string_drone = segments_element_drone.innerHTML;
+      var segments_array_drone = JSON.parse(segments_string_drone);
+
+      var renderer, scene, camera, controls;
+      var width = window.innerWidth, height = window.innerHeight;
+      const terrain = "../static/output.bin", geoJson = "../static/buildings.geojson";
+      const riskLayer = "../static/risk.bin";
+      const riskLayerImage = "../static/relief.png";
+      const terrainDrone = "../static/dsm.bin";
+
+      //drone
+      const imageDrone = "../static/orthophoto.png";
+      const droneWidth = imageDrone.naturalWidth;
+      const droneHeight = imageDrone.naturalHeight;
+      const segmentDroneX = 96, segmentDroneY = segments_array_drone[1];
+      const upperRightDrone = [coords_array_drone[2], coords_array_drone[0]]; lowerLeftDrone = [coords_array_drone[3], coords_array_drone[1]];
+      const centerDrone = [median([upperRightDrone[0], lowerLeftDrone[0]]), median([upperRightDrone[1], lowerLeftDrone[1]])];
+      var sizeDroneX = calculateSize(lowerLeftDrone, upperRightDrone, centerDrone)[0];
+      var sizeDroneY = calculateSize(lowerLeftDrone, upperRightDrone, centerDrone)[1];
+
+      const segmentX = 96, segmentY = 96
+      const upperRight = [coords_array[2], coords_array[0]]; lowerLeft = [coords_array[3], coords_array[1]];
+      const center = [median([upperRight[0], lowerLeft[0]]), median([upperRight[1], lowerLeft[1]])];
+      var sizeX = calculateSize(lowerLeft, upperRight, center)[0], sizeY = calculateSize(lowerLeft, upperRight, center)[1];
+      const satImage = "../static/cropped-to-bbox.jpg";
+      var vertexArray = new Array(), buildingArray = new Array();
+      var xarray = new Array(), yarray = new Array();
+      var boolArray = new Array();
+      var vertexArraynew = new Array(), transparentArray = new Array();
+      var centerTerrainX = calculateSize(lowerLeft, upperRight, center)[2], centerTerrainY = calculateSize(lowerLeft, upperRight, center)[3];
+      var count = 0; var counter = 0;
+
+      startMap();
+
+      function startMap() {
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(width, height);
+
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x222222); // Can be seen as the "Skybox". Color of the background
+
+        // let gridHelper = new THREE.GridHelper(100, 160, 
+        // new THREE.Color(0x555555), new THREE.Color(0x333333))
+        // scene.add(gridHelper)
+
+        // const axes = new THREE.AxesHelper(20); // Adds axes colors to scene. 
+        // scene.add(axes);
+
+        const light = new THREE.DirectionalLight(0xffffff);
+        light.position.set(0, 1, 1).normalize();
+        scene.add(light);
+
+        camera = new THREE.PerspectiveCamera(90, width / height, 1, 500000);
+        camera.position.set(44, 200, 12);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.target = new THREE.Vector3(44, 0, 12)
+        controls.update()
+
+        // function animate() {
+        //     requestAnimationFrame( animate );
+
+        //     controls.update();
+
+        //     renderer.render( scene, camera)
+        // }
+
+        
+        genTerrain();
+        genRiskLayer();
+        GetGeoJson();
+        genDroneTerrain();
+        render();
+
+      }
+
+      function genTerrain() {
+        var terrainLoader = new THREE.TerrainLoader();
+        terrainLoader.load(terrain, function (data) {
+
+          var geometry = new THREE.PlaneGeometry(sizeX, sizeY, segmentX - 1, segmentY - 1);
+
+          for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+            console.log(data[i]);
+            geometry.vertices[i].z = data[i] / 65535 * 3;
+            vertexArray.push(geometry.vertices[i]);
+          }
+          //compare();
+          //console.log(vertexArray)
+          geometry.rotateX(Math.PI / 2);
+          geometry.rotateZ(Math.PI);
+          geometry.rotateY(Math.PI);
+
+          // var material = new THREE.MeshPhongMaterial({
+          //     color: 0x00ff00, 
+          //     wireframe: true
+          // });
+
+          var texture = new THREE.TextureLoader().load(satImage);
+          //texture.center.set(0.5,0.5)
+          //texture.rotation=Math.PI
+
+          var material = new THREE.MeshBasicMaterial({
+            map: texture
+            //    wireframe : true,
+            //     color : 0xFFFFFF
+          });
+
+          var plane = new THREE.Mesh(geometry, material);
+          // plane.position.set(centerTerrainX, 0, centerTerrainY);
+          for (var t = 0; t < vertexArray.length; t++) {
+            xarray.push(vertexArray[t].x + centerTerrainX);
+            yarray.push(vertexArray[t].z + centerTerrainY);
+            //console.log(xarray[t], vertexArray[t], yarray[t])
+          }
+          //console.log(plane);
+
+
+          scene.add(plane);
+        });
+      }
+      function genDroneTerrain() {
+          console.log(segmentDroneX);
+          console.log(segmentDroneY)
+          var terrainLoader = new THREE.TerrainLoader();
+          terrainLoader.load(terrainDrone, function (data) {
+            var geometry = new THREE.PlaneGeometry(sizeDroneX, sizeDroneY, segmentDroneX - 1, segmentDroneY - 1);
+            for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+              geometry.vertices[i].z = data[i] / 65535 * 100;
+              vertexArraynew.push(geometry.vertices[i]);
+            }
+
+            geometry.rotateX(Math.PI / 2);
+            geometry.rotateY(Math.PI);
+            geometry.rotateZ(Math.PI);
+
+            var texture = new THREE.TextureLoader().load(imageDrone);
+
+            var material = new THREE.MeshBasicMaterial({
+              transparent: true,
+              transmission: 1,
+              map: texture,
+              // color: 0xFFFFFF,
+              // wireframe: true
+            });
+
+            pos = GPSRelativePosition(centerDrone, center)
+            //console.log(pos)
+
+            var plane = new THREE.Mesh(geometry, material);
+            plane.position.set(pos[1], 0.8, pos[0]);
+            scene.add(plane);
+          })
+      }
+      function genRiskLayer() {
+        var terrainLoader = new THREE.TerrainLoader();
+        terrainLoader.load(riskLayer, function (data) {
+
+          var geometry = new THREE.PlaneGeometry(sizeX, sizeY, segmentX - 1, segmentY - 1);
+          for (var i = 0, l = geometry.vertices.length; i < l; i++) {
+            geometry.vertices[i].z = vertexArray[i].y + data[i] / 65535 * 80;
+            vertexArraynew.push(geometry.vertices[i]);
+          }
+          geometry.rotateX(Math.PI / 2);
+          geometry.rotateZ(Math.PI);
+          geometry.rotateY(Math.PI);
+
+          var texture = new THREE.TextureLoader().load(riskLayerImage);
+
+          var material = new THREE.MeshBasicMaterial({
+            transparent: true,
+            map: texture,
+            // color: 0xFFFFFF,
+            // wireframe: true
+          });
+
+          var plane = new THREE.Mesh(geometry, material);
+          plane.position.set(centerTerrainX, 0.8, centerTerrainY);
+          scene.add(plane);
+        });
+      }
+
+      // function compare(){
+      //     for (var i = 0, l = vertexArray.length; i < l; i++) {
+      //             if((vertexArraynew[i].y>=(vertexArray[i].y/100))){
+      //                 boolArray.push(true);
+      //             } 
+      //             else{boolArray.push(false);}
+      //         }
+      // }
+
+
+      function calculateSize(ll, ur, c) {
+        let disLL = window.geolib.getDistance(ll, c)
+        let bearingLL = window.geolib.getRhumbLineBearing(ll, c)
+        let xLL = -(c[0] + (disLL * Math.cos(bearingLL * Math.PI / 180)))// / 100
+        let yLL = (c[1] + (disLL * Math.sin(bearingLL * Math.PI / 180)))// / 100
+
+        //console.log(xLL, "," ,yLL)
+
+        let disUR = window.geolib.getDistance(ur, c)
+        let bearingUR = window.geolib.getRhumbLineBearing(ur, c)
+        let xUR = -(c[0] + (disUR * Math.cos(bearingUR * Math.PI / 180)))// / 100
+        let yUR = (c[1] + (disUR * Math.sin(bearingUR * Math.PI / 180)))// / 100
+
+        centerY = median([xUR, xLL]); centerX = median([yUR, yLL]);
+        let y = -(xLL - xUR); let x = -(yUR - yLL);
+        const terrainSize = [x, y, centerX, centerY]
+        //console.log(terrainSize)
+        return terrainSize;
+      }
+
+      function median(arr) {
+        if (arr.length == 0) {
+          return; // 0.
+        }
+        arr.sort((a, b) => a - b); // 1.
+        const midpoint = Math.floor(arr.length / 2); // 2.
+        const median = arr.length % 2 === 1 ?
+          arr[midpoint] : // 3.1. If odd length, just take midpoint
+          (arr[midpoint - 1] + arr[midpoint]) / 2; // 3.2. If even length, take median of midpoints
+        return median;
+      }
+
+
+      //Fetch Buildings 2nd Attempt
+
+      function GetGeoJson() {
+        fetch(geoJson).then((res) => {
+          res.json().then((data) => {
+            LoadBuildings(data)
+          })
+        })
+      }
+
+      function LoadBuildings(data) {
+        let features = data.features
+        for (let i = 0; i < features.length; i++) {
+
+          let fel = features[i]
+          if (!fel['properties']) return
+
+          if (fel.properties['building']) {
+            addBuilding(fel.geometry.coordinates, fel.properties, fel.properties["building:levels"])
+          }
+        }
+      }
+
+      function addBuilding(data, info, height = 1) {
+
+        height = height ? height : 1
+
+        for (let i = 0; i < data.length; i++) {
+          let el = data[i]
+
+          let shape = genShape(el, center)
+          let colors = shape[2];
+          let geometry = genGeometry(shape[0], {
+            curveSegments: 1,
+            depth: 10 * height,
+            bevelEnabled: false
+          })
+
+          var MAT_BUILDING = new THREE.MeshPhongMaterial({
+            color: colors
+          });
+
+          geometry.rotateX(degTorad(90))
+          geometry.rotateZ(degTorad(180))
+          geometry.rotateY(degTorad(90))
+
+          let mesh = new THREE.Mesh(geometry, MAT_BUILDING)
+          mesh.position.y = shape[1]
+
+          scene.add(mesh);
+
+        }
+      }
+
+      function genShape(points, center) {
+        let shape = new THREE.Shape()
+        var va;
+        var color;
+
+        for (let i = 0; i < points.length; i++) {
+          let elp = points[i]
+          elp = GPSRelativePosition(elp, center)
+          va = elp[2];
+          color = elp[3];
+
+          if (i == 0) {
+            shape.moveTo(elp[0], elp[1])
+          }
+          else {
+            shape.lineTo(elp[0], elp[1])
+          }
+        }
+        return [shape, va, color]
+      }
+
+      function genGeometry(shape, settings) {
+        let geometry = new THREE.ExtrudeBufferGeometry(shape, settings)
+        geometry.computeBoundingBox()
+
+        return geometry
+      }
+
+      function GPSRelativePosition(objPosi, centerPosi) {
+
+        // Get GPS distance
+        let dis = window.geolib.getDistance(objPosi, centerPosi)
+
+        // Get bearing angle
+        let bearing = window.geolib.getRhumbLineBearing(objPosi, centerPosi)
+
+        // Calculate X by centerPosi.x + distance * cos(rad)
+        let x = centerPosi[0] + (dis * Math.cos(bearing * Math.PI / 180))
+
+        // Calculate Y by centerPosi.y + distance * sin(rad)
+        let y = centerPosi[1] + (dis * Math.sin(bearing * Math.PI / 180))
+        x /= -1//00;
+        y /= 1//00;
+        var z = 0.8;
+        var color = 'white'
+        for (var p = 0, l = vertexArray.length; p < l; p++) {
+          if ((yarray[p] <= x + 0.47
+            && yarray[p] >= x - 0.47)
+            && (xarray[p] <= y + 0.47
+              && xarray[p] >= y - 0.47)) {
+            //console.log(vertexArraynew[p].y, vertexArray[p].y);
+            if (((vertexArraynew[p].y) - (vertexArray[p].y)) >= 0.01) {
+              color = 'red';
+            }
+
+            z = vertexArray[p].y;
+            count++;
+            break;
+          }
+        }
+        counter++;
+        //console.log(x, y, counter, count, color)
+
+
+        // Reverse X (it works) 
+        return [x, y, z, color]
+      }
+
+      //console.log(vertexArray);
+
+      document.getElementById('webgl').appendChild(renderer.domElement);
+
+      function render() {
+        controls.update();
+        requestAnimationFrame(render);
+        renderer.render(scene, camera);
+      }
+
+      function degTorad(degrees) {
+        var pi = Math.PI;
+        return degrees * (pi / 180);
+      }
+
+    </script>
+  </div>
+</body>
+
+</html>

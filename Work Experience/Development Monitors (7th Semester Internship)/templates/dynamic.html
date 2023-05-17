@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic rendering</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/dynamic.css')}}">
+</head>
+
+<body>
+    <h1 class="hidden">dynamic rendering</h1>
+
+    <div>
+    <h2>Render with coordinates</h2>
+    <form id="coordinate-form">
+        <label>Latitude:</label>
+        <input type="text" id="latitude" name="latitude">
+        <label>Longitude:</label>
+        <input type="text" id="longitude" name="longitude">
+        <button type="submit">Submit</button>
+    </form>
+    <div class="progress hidden">
+        <div class="progress-loader">
+            <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <p class="progress-bar__feedback"></p>
+        </div>
+        <div class="progress-bar__container">
+            <div class="progress-bar">
+                <div class="progress-bar__animation"></div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="button_render">
+    
+    </div>
+
+    <div>
+
+        <h2>Render with ODM outputs</h2>
+        <form id="drone-form" method="POST" enctype="multipart/form-data">
+            {{form.hidden_tag()}}
+            <label>The dsm.tif file:</label>
+            {{form.dsmFile()}}
+            <label>The odm_orthophoto.tif file:</label>
+            {{form.orthophotoFile()}}
+            {{form.submit()}}
+        </form>
+    </div>
+
+    
+    
+
+
+    <script>
+        const form = document.querySelector("#coordinate-form");
+        const buttonRender = document.querySelector(".button_render");
+        
+        const progress = document.querySelector('.progress');
+        const progressBar = document.querySelector('.progress-bar');
+        const progressAnimation = document.querySelector('.progress-bar__animation');
+        const progressBarFeedback = document.querySelector('.progress-bar__feedback');
+
+        
+
+        
+
+        async function fetchUrl(url)  {
+            await fetch(url);
+        }
+
+        
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            console.log('submit test');
+            
+
+            var latitude = document.querySelector("#latitude").value;
+            var longitude = document.querySelector("#longitude").value;
+
+            var min_lat = latitude - 0.040;
+            var max_lat = latitude / 1 + 0.040;
+            var min_lon = longitude - 0.040;
+            var max_lon = longitude / 1 + 0.040;
+
+           
+            var urlElevation = window.location.protocol + "//" + window.location.host + "/elevation?min_lat=" + min_lat + "&max_lat=" + max_lat + "&min_lon=" + min_lon + "&max_lon=" + max_lon;
+            var urlBuildings = window.location.protocol + "//" + window.location.host + "/buildings"
+            var urlRisk = window.location.protocol + "//" + window.location.host + "/risklayer"
+            var urlSatelite = window.location.protocol + "//" + window.location.host + "/satelite"
+            
+            b_box = [min_lat, max_lat, min_lon, max_lon];
+            console.log(b_box);
+
+
+            progress.classList.remove('hidden');
+            progressBar.style.animation = "load1 10s 1s forwards"
+            progressBarFeedback.innerHTML = "Fetching elevation data..."
+            await fetchUrl(urlElevation);
+            progressBar.style.left = "var(--stop1)";
+            progressBar.style.animation = "load2 120s forwards"
+
+            progressBarFeedback.innerHTML = "Fetching buildings..."
+            await fetchUrl(urlBuildings);
+            progressBar.style.left = "var(--stop2)";
+            progressBar.style.animation = "load3 30s forwards"
+
+            progressBarFeedback.innerHTML = "Generating risk layer..."
+            await fetchUrl(urlRisk);
+            progressBar.style.left = "var(--stop3)";
+            progressBar.style.animation = "load4 300s forwards"
+            
+            progressBarFeedback.innerHTML = "Creating satelite imagery..."
+            await fetchUrl(urlSatelite);
+
+            progressBar.style.left = "0%";
+            progress.classList.add('hidden');
+
+            buttonRender.innerHTML = `
+                <div>Ready to render!</div>
+                <button><a href="{{url_for('dRender') }}">Render</a></button>
+                `
+              
+            
+        });
+    </script>
+
+    
+
+</body>
+
+</html>

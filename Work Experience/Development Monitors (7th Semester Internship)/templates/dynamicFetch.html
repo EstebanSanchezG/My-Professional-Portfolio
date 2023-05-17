@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Terrain Renderer</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='/css/landing.css')}}">
+</head>
+
+<header>
+    <div id="nav-bar">
+        <nav>
+            <a id="return" href="{{url_for('index') }}">&lt; Return</a>
+        </nav>
+    </div>
+</header>
+
+<body>
+   <h1>3D Terrains</h1>
+   
+    <!-- User Inputs-->
+   
+    <form method="post">
+        <div class="CoorInpCols"> 
+                <div class="SouhtWestPoint">
+                    <h3>West Longitude </h3>
+                        <input type="text" 
+                        name="wlong" 
+                        value="{{ request.form['wlong'] }}"> 
+
+                    <h3>South Latitude</h3>   
+                        <input type="text" 
+                        name="slati" v
+                        alue="{{ request.form['slati'] }}">
+                </div>
+
+                <div class="NorthEastPoint">
+                    <h3>East Longitude</h3>
+                        <input type="text" 
+                        name="elong" 
+                        value="{{ request.form['elong'] }}">
+
+                    <h3>North Latitud</h3>
+                        <input type="text" 
+                        name="nlati" 
+                        value="{{ request.form['nlati'] }}">
+                </div>       
+        </div>
+
+        <button type="submit">Render Map</button>
+    </form>
+  
+    <!-- Tutorial for Users-->
+
+</body>
+</html>

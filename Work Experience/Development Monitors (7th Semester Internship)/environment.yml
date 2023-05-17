@@ -1,0 +1,27 @@
+name: gis
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - flask
+  - flask-wtf
+  - flask-cors
+  - gunicorn
+  - eventlet
+  - pyopenssl
+  - cryptography
+  - requests
+  - gdal
+  - curl
+  - elevation
+  - gzip
+  - unzip
+  - fiona
+  - rasterio
+  - geopandas
+  - colorama
+  - sentinelsat
+  - opencv
+  - osmnx
